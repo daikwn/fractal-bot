@@ -4,14 +4,18 @@ class MessengerBotController < ActionController::Base
     YahooParseApi::Config.app_id = @application_ID
     
   def message(event, sender)
-
+    parse_api = YahooParseApi::Parse.new
     # GET Request
     profile = sender.get_profile[:body]
     profile_last_name = profile['last_name']
     profile_first_name = profile['first_name']
- 
+    result = parse_api.parse(['message']['text'], {
+             results: 'ma,uniq',
+             uniq_filter: '9|10'})
+    bot_rep = ResultSet["ma_result"]
+             
     # profile = sender.get_profile(field) # default field [:locale, :timezone, :gender, :first_name, :last_name, :profile_pic]
-
+    sender.reply({ text: "Reply: #{bot_rep}" })
     sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんこんにちは" })
   end
 
