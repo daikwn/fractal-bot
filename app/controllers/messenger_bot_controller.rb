@@ -13,8 +13,10 @@ class MessengerBotController < ActionController::Base
              results: 'ma,uniq',
              uniq_filter: '9|10'
              })
+             
+             
     # profile = sender.get_profile(field) # default field [:locale, :timezone, :gender, :first_name, :last_name, :profile_pic]
-    sender.reply({ text: "Reply: #{result}" })
+    sender.reply({ text: "Reply: #{word_list}" })
     sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんこんにちは" })
   end
 
