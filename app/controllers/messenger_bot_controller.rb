@@ -1,12 +1,11 @@
 class MessengerBotController < ActionController::Base
     require 'yahoo_parse_api'
+    YahooParseApi::Config.app_id = @application_ID
     @application_ID = "dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-"
     
   def message(event, sender)
-    YahooParseApi::Config.app_id = @application_ID
     parse_api = YahooParseApi::Parse.new
     # GET Request
-    
     profile = sender.get_profile[:body]
     profile_last_name = profile['last_name']
     profile_first_name = profile['first_name']
