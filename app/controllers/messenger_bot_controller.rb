@@ -1,18 +1,18 @@
+require 'yahoo_parse_api'
+
 class MessengerBotController < ActionController::Base
-    require 'yahoo_parse_api'
-    @application_ID = "dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-"
-    YahooParseApi::Config.app_id = @application_ID
     
   def message(event, sender)
+    YahooParseApi::Config.app_id = 'dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-'
     parse_api = YahooParseApi::Parse.new
     # GET Request
     profile = sender.get_profile[:body]
     profile_last_name = profile['last_name']
     profile_first_name = profile['first_name']
-    result = parse_api.parse(['message']['text'], {
+    result = parse_api.parse(event['message']['text'], {
              results: 'ma,uniq',
              uniq_filter: '9|10'})
-    bot_rep = ResultSet["ma_result"]
+    bot_rep = result['ResultSet']["ma_result"]['total_count']
              
     # profile = sender.get_profile(field) # default field [:locale, :timezone, :gender, :first_name, :last_name, :profile_pic]
     sender.reply({ text: "Reply: #{bot_rep}" })
