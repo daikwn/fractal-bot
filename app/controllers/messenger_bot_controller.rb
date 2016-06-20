@@ -1,7 +1,7 @@
 class MessengerBotController < ActionController::Base
     require 'yahoo_parse_api'
-    YahooParseApi::Config.app_id = @application_ID
     @application_ID = "dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-"
+    YahooParseApi::Config.app_id = @application_ID
     
   def message(event, sender)
     parse_api = YahooParseApi::Parse.new
@@ -11,9 +11,7 @@ class MessengerBotController < ActionController::Base
     profile_first_name = profile['first_name']
     result = parse_api.parse(['message']['text'], {
              results: 'ma,uniq',
-             uniq_filter: '9|10'
-             })
-             
+             uniq_filter: '9|10'})
              
     # profile = sender.get_profile(field) # default field [:locale, :timezone, :gender, :first_name, :last_name, :profile_pic]
     sender.reply({ text: "Reply: #{word_list}" })
