@@ -1,8 +1,6 @@
 require 'yahoo_parse_api'
 
 class MessengerBotController < ActionController::Base
-  
-  
     
   def message(event, sender)
     YahooParseApi::Config.app_id = 'dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-'
@@ -36,11 +34,11 @@ class MessengerBotController < ActionController::Base
     rep_jd = jodoushi.count
     rep_sp = spword.count
     # profile = sender.get_profile(field) # default field [:locale, :timezone, :gender, :first_name, :last_name, :profile_pic]
-    sender.reply({ text: "Reply: #{rep_m}" })
-    sender.reply({ text: "Reply: #{rep_d}" })
-    sender.reply({ text: "Reply: #{rep_j}" })
-    sender.reply({ text: "Reply: #{rep_jd}" })
-    sender.reply({ text: "Reply: #{rep_sp}" })
+    sender.reply({ text: "名詞: #{rep_m}" })
+    sender.reply({ text: "動詞: #{rep_d}" })
+    sender.reply({ text: "助詞: #{rep_j}" })
+    sender.reply({ text: "助動詞: #{rep_jd}" })
+    sender.reply({ text: "特殊: #{rep_sp}" })
     sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんこんにちは" })
   end
 
