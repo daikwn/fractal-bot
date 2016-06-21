@@ -7,11 +7,7 @@ class MessengerBotController < ActionController::Base
   def message(event, sender)
     YahooParseApi::Config.app_id = 'dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-'
     parse_api = YahooParseApi::Parse.new
-    cashe = 0
-    if event['message']['text'] == 'フラクタル'
-       cashe = 1
-       sender.reply({ text: "あなたの自己紹介を30文字以上で記入してください。" })
-    elsif cashe == 1
+    
     profile = sender.get_profile[:body]
     profile_last_name = profile['last_name']
     profile_first_name = profile['first_name']
@@ -46,7 +42,6 @@ class MessengerBotController < ActionController::Base
     sender.reply({ text: "Reply: #{rep_jd}" })
     sender.reply({ text: "Reply: #{rep_sp}" })
     sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんこんにちは" })
-    end
   end
 
   def delivery(event, sender)
