@@ -11,13 +11,14 @@ class MessengerBotController < ActionController::Base
     profile_first_name = profile['first_name']
     result = parse_api.parse(event['message']['text'], {
              results: 'ma,uniq',
-             ma_response: 'pos',
              uniq_filter: '9|10'})
-    meishi = result.select do |b|
-               b['pos'] == '名詞'
+    bot_rep = result['ResultSet']['ma_result']['word_list']['word']
+    meishi = bot_rep.select do |b|
+      b["pos"] == "名詞"
     end
     
     rep_m = meishi.count
+
              
     # profile = sender.get_profile(field) # default field [:locale, :timezone, :gender, :first_name, :last_name, :profile_pic]
     sender.reply({ text: "Reply: #{rep_m}" })
