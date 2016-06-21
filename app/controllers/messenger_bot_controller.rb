@@ -11,7 +11,6 @@ class MessengerBotController < ActionController::Base
     profile_first_name = profile['first_name']
     result = parse_api.parse(event['message']['text'], {
              results: 'ma',
-             ma_response: 'pos',
              uniq_filter: '9|10'})
     bot_rep = result['ResultSet']['ma_result']['word_list']['word']['pos']
              
