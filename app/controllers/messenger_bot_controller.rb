@@ -10,7 +10,7 @@ class MessengerBotController < ActionController::Base
     if event['message']['text'] == 'フラクタル'
        @cashe = 1
        sender.reply({ text: "あなたの自己紹介を30文字以上で記入してください。" })
-     elsif @cashe == 1
+      elsif cashe == 1
       result = parse_api.parse(event['message']['text'], {
                results: 'ma,uniq',
                uniq_filter: '9|10'})
