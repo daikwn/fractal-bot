@@ -12,7 +12,7 @@ class MessengerBotController < ActionController::Base
     result = parse_api.parse(event['message']['text'], {
              results: 'ma,uniq',
              uniq_filter: '9|10'})
-    bot_rep = result['ResultSet']["ma_result"]["word_list"]
+    bot_rep = result['ResultSet']["ma_result"]["word_list"]["word"]["pos"]
              
     # profile = sender.get_profile(field) # default field [:locale, :timezone, :gender, :first_name, :last_name, :profile_pic]
     sender.reply({ text: "Reply: #{bot_rep}" })
