@@ -16,7 +16,7 @@ class MessengerBotController < ActionController::Base
     rep_s = bot_rep.count("名詞")
     rep_v = bot_rep.count("動詞")
     rep_c = bot_rep.count("助詞")
-    rep_s = bot_rep.count("特殊")
+    rep_s = bot_rep.count
              
     # profile = sender.get_profile(field) # default field [:locale, :timezone, :gender, :first_name, :last_name, :profile_pic]
     sender.reply({ text: "Reply: #{rep_s}" })
