@@ -10,8 +10,8 @@ class MessengerBotController < ActionController::Base
     profile_last_name = profile['last_name']
     profile_first_name = profile['first_name']
     result = parse_api.parse(event['message']['text'], {
-             results: 'ma',
-             ma_filter: '9|10'})
+             results: 'ma,uniq',
+             uniq_filter: '9|10'})
     bot_rep = result['ResultSet']['ma_result']['word_list']['word']
     rep_s = bot_rep.count("名詞")
     rep_v = bot_rep.count("動詞")
