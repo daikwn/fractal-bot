@@ -35,25 +35,6 @@ class MessengerBotController < ActionController::Base
     rep_jd = jodoushi.count
     rep_sp = spword.count
     
-    format = Cairo::FORMAT_ARGB32
-    width = 300
-    height = 200
-    radius = height / 3 # 半径
-
-    surface = Cairo::ImageSurface.new(format, width, height)
-    context = Cairo::Context.new(surface)
-
-    # 背景
-    context.set_source_rgb(1, 1, 1) # 白
-    context.rectangle(0, 0, width, height)
-    context.fill
-
-    # 赤丸
-    context.set_source_rgb(1, 0, 0) # 赤
-    context.arc(width / 2, height / 2, radius, 0, 2 * Math::PI)
-    context.fill
-
-    surface.write_to_png("hinomaru.png")
     
     # profile = sender.get_profile(field) # default field [:locale, :timezone, :gender, :first_name, :last_name, :profile_pic]
     sender.reply({ text: "名詞: #{rep_m}" })
@@ -62,12 +43,6 @@ class MessengerBotController < ActionController::Base
     sender.reply({ text: "助動詞: #{rep_jd}" })
     sender.reply({ text: "特殊: #{rep_sp}" })
     sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんこんにちは" })
-    sender.reply({ "attachment": {
-                "type": "image",
-                "payload": {"url": image_url("hinomaru.png")}
-                                  }  
-       
-    })
   end
 
   def delivery(event, sender)
