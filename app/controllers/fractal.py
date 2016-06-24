@@ -27,5 +27,3 @@ for y in range(imgy):
         g = i % 8 * 32
         b = i % 16 * 32
         image.putpixel((x, y), b * 65536 + g * 256 + r)
-
-image.save("julia.png", "PNG")
