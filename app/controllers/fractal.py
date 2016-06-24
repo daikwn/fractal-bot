@@ -11,6 +11,7 @@ maxIt = 256 # iterations
 # image size
 imgx = 512
 imgy = 512
+
 image = Image.new("RGB", (imgx, imgy))
 # Julia set to draw
 c = complex(0.21 * 2.0 - 1.0, 0.05 - 0.5)
@@ -27,3 +28,10 @@ for y in range(imgy):
         g = i % 8 * 32
         b = i % 16 * 32
         image.putpixel((x, y), b * 65536 + g * 256 + r)
+
+tmp1 = image.rotate(90)
+tmp1.save("julia1.png", "PNG")
+tmp2 = tmp1.resize((imgx + 300,imgy + 300))
+tmp2.save("julia2.png", "PNG")
+tmp3 = tmp2.crop((150,150,imgx + 150,imgy + 150))
+tmp3.save("julia3.png", "PNG")
