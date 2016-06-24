@@ -1,6 +1,4 @@
 require 'yahoo_parse_api'
-require 'cairo'
-require 'CSV'
 
 class MessengerBotController < ActionController::Base
     
