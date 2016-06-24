@@ -43,6 +43,9 @@ class MessengerBotController < ActionController::Base
     sender.reply({ text: "助動詞: #{rep_jd}" })
     sender.reply({ text: "特殊: #{rep_sp}" })
     sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんこんにちは" })
+    
+    filename = 'julia.png'
+    File.unlink filename
   end
 
   def delivery(event, sender)
