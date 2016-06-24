@@ -1,5 +1,6 @@
 require 'yahoo_parse_api'
 require 'cairo'
+require 'CSV'
 
 class MessengerBotController < ActionController::Base
     
@@ -29,12 +30,14 @@ class MessengerBotController < ActionController::Base
     spword = bot_rep.select do |b|
       b["pos"] == "特殊"
     end
-    rep_m = meishi.count
+    rep_m = meishi.count/100
     rep_d = doushi.count
     rep_j = joshi.count
     rep_jd = jodoushi.count
     rep_sp = spword.count
     
+    
+    sytem ('python fractal.py')
     
     # profile = sender.get_profile(field) # default field [:locale, :timezone, :gender, :first_name, :last_name, :profile_pic]
     sender.reply({ text: "名詞: #{rep_m}" })
