@@ -34,7 +34,7 @@ class MessengerBotController < ActionController::Base
     rep_jd = jodoushi.count
     rep_sp = spword.count
     
-    sytem ('python fractal.py')
+    system ('python fractal.py')
     
     # profile = sender.get_profile(field) # default field [:locale, :timezone, :gender, :first_name, :last_name, :profile_pic]
     sender.reply({ text: "名詞: #{rep_m}" })
