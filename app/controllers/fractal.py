@@ -31,4 +31,4 @@ for y in range(imgy):
 tmp1 = image.rotate(90)
 tmp2 = tmp1.resize((imgx + 300,imgy + 300))
 tmp3 = tmp2.crop((150,150,imgx + 150,imgy + 150))
-tmp3.save("https://drive.google.com/open?id=0B_KFJ0o-uPZNQU9KMVlCUUlhMTA", "PNG")
+tmp3.save("julia.png", "PNG")
