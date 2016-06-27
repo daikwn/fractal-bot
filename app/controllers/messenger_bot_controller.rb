@@ -5,6 +5,7 @@ class MessengerBotController < ActionController::Base
   def message(event, sender)
     YahooParseApi::Config.app_id = 'dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-'
     parse_api = YahooParseApi::Parse.new
+    filename = 'julia.png'
     profile = sender.get_profile[:body]
     profile_last_name = profile['last_name']
     profile_first_name = profile['first_name']
@@ -35,16 +36,18 @@ class MessengerBotController < ActionController::Base
     
     system ('python fractal.py')
     
-    
     sender.reply({ text: "名詞: #{rep_m}" })
     sender.reply({ text: "動詞: #{rep_d}" })
     sender.reply({ text: "助詞: #{rep_j}" })
     sender.reply({ text: "助動詞: #{rep_jd}" })
     sender.reply({ text: "特殊: #{rep_sp}" })
     sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんこんにちは" })
+    sender.reply({ "attachment": {
+                   "type": "image",
+                   "payload": {"url": filename}}
+                })
     
-    # profile = sender.get_profile(field) # default field [:locale, :timezone, :gender, :first_name, :last_name, :profile_pic]
-    filename = 'julia.png'
+    # profile = sender.get_profile(field) # default field [:locale, :timezone, :gender, :first_name, :last_name, :profile_pic
     File.unlink filename
   end
 
