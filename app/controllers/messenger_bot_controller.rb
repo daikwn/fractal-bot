@@ -43,7 +43,7 @@ class MessengerBotController < ActionController::Base
     sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんこんにちは" })
     sender.reply({ "attachment": {
                    "type": "image",
-                   "payload": {"url": "julia.png"}}
+                   "payload": {"url": "https://drive.google.com/file/d/0B_KFJ0o-uPZNQU9KMVlCUUlhMTA/view?usp=sharing"}}
                 })
     
     # profile = sender.get_profile(field) # default field [:locale, :timezone, :gender, :first_name, :last_name, :profile_pic
