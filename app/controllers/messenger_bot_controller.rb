@@ -1,4 +1,5 @@
 require 'yahoo_parse_api'
+require 'base64'
 
 class MessengerBotController < ActionController::Base
     
@@ -33,7 +34,8 @@ class MessengerBotController < ActionController::Base
     rep_jd = jodoushi.count
     rep_sp = spword.count
     
-    system ('python fractal.py')
+    system ('python fractal.py data_uri')
+    data_URL = Base64.decode64(data_uri)
     
     sender.reply({ text: "名詞: #{rep_m}" })
     sender.reply({ text: "動詞: #{rep_d}" })
@@ -43,11 +45,9 @@ class MessengerBotController < ActionController::Base
     sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんこんにちは" })
     sender.reply({ "attachment": {
                    "type": "image",
-                   "payload": {"url": "julia.png"}}
+                   "payload": {"url": "data_URL"}}
                 })
-    
     # profile = sender.get_profile(field) # default field [:locale, :timezone, :gender, :first_name, :last_name, :profile_pic
-
   end
 
   def delivery(event, sender)

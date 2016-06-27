@@ -1,8 +1,12 @@
 # Julia fractal
 # FB - 201003151
 from PIL import Image
+import sys
 import numpy
 import random
+import base64
+import cStringIO
+
 # drawing area (xa < xb and ya < yb)
 xa = -2.0
 xb = 1.0
@@ -32,4 +36,7 @@ for y in range(imgy):
 tmp1 = image.rotate(90)
 tmp2 = tmp1.resize((imgx + 300,imgy + 300))
 tmp3 = tmp2.crop((150,150,imgx + 150,imgy + 150))
-tmp3.save("julia.png", "PNG")
+
+buffer = cStringIO.StringIO()
+tmp3.save(buffer, format="JPEG")
+data_uri = base64.b64encode(buffer.getvalue())
