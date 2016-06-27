@@ -19,8 +19,6 @@ c = S3Connection(AWS_KEY_ID, AWS_SECRET_KEY, host='s3-ap-northeast-1.amazonaws.c
 b = c.get_bucket(BUCKET_NAME)
 k = Key(b)
 k.key = KEY_NAME
-# S3に作成したファイルを保存します。
-
 
 # drawing area (xa < xb and ya < yb)
 xa = -2.0
