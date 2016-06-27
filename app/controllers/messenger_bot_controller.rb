@@ -1,5 +1,4 @@
 require 'yahoo_parse_api'
-require 'base64'
 
 class MessengerBotController < ActionController::Base
   def message(event, sender)
@@ -32,9 +31,12 @@ class MessengerBotController < ActionController::Base
     rep_j = joshi.count
     rep_jd = jodoushi.count
     rep_sp = spword.count
-    system ('python fractal.py data_uri')
+    system ('python fractal.py')
     
-    data_uri = "data:image/jpeg;base64," + data_uri
+    Aws.config = { access_key_id: 'AKIAJ5ZQBMY4GW6W6PQQ', secret_access_key: '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' }
+    s3 = Aws::S3::Client.new(region: 'ap-northeast-1')
+    signer = Aws::S3::Presigner.new(client: s3)
+    data_uri = signer.presigned_url(:get_object, bucket: 'fractal-daikawano', key: 'julia.png', expires_in: 60)
     
     sender.reply({ text: "名詞: #{rep_m}" })
     sender.reply({ text: "動詞: #{rep_d}" })
