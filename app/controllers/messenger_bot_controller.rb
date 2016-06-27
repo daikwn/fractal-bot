@@ -44,7 +44,7 @@ class MessengerBotController < ActionController::Base
     sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんこんにちは" })
     sender.reply({ "attachment": {
                    "type": "image",
-                   "payload": {"url": filename}}
+                   "payload": {"url": "julia.png"}}
                 })
     
     # profile = sender.get_profile(field) # default field [:locale, :timezone, :gender, :first_name, :last_name, :profile_pic

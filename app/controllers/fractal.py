@@ -11,7 +11,6 @@ maxIt = 256 # iterations
 # image size
 imgx = 512
 imgy = 512
-
 image = Image.new("RGB", (imgx, imgy))
 # Julia set to draw
 c = complex(0.21 * 2.0 - 1.0, 0.05 - 0.5)
