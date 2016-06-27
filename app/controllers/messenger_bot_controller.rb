@@ -5,7 +5,6 @@ class MessengerBotController < ActionController::Base
   def message(event, sender)
     YahooParseApi::Config.app_id = 'dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-'
     parse_api = YahooParseApi::Parse.new
-    filename = 'julia.png'
     profile = sender.get_profile[:body]
     profile_last_name = profile['last_name']
     profile_first_name = profile['first_name']
@@ -48,7 +47,7 @@ class MessengerBotController < ActionController::Base
                 })
     
     # profile = sender.get_profile(field) # default field [:locale, :timezone, :gender, :first_name, :last_name, :profile_pic
-    File.unlink filename
+
   end
 
   def delivery(event, sender)
