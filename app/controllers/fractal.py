@@ -1,6 +1,7 @@
 # Julia fractal
 # FB - 201003151
 from PIL import Image
+import numpy
 import random
 # drawing area (xa < xb and ya < yb)
 xa = -2.0
