@@ -1,7 +1,6 @@
 require 'yahoo_parse_api'
 require 'aws-sdk'
 
-
 class MessengerBotController < ActionController::Base
   def message(event, sender)
     YahooParseApi::Config.app_id = 'dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-'
