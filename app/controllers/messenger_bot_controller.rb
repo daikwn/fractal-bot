@@ -34,10 +34,11 @@ class MessengerBotController < ActionController::Base
     rep_sp = spword.count
     system ('python fractal.py')
     
-s3 = Aws::S3::Resource.new(access_key_id: "AKIAJ5ZQBMY4GW6W6PQQ",
+    s3 = Aws::S3::Resource.new(access_key_id: "AKIAJ5ZQBMY4GW6W6PQQ",
                       secret_access_key:  "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",
                       region: "ap-northeast-1")
-obj = s3.bucket("fractal-daikawano").object("http://s3-ap-northeast-1.amazonaws.com/fractal-daikawano")
+    obj = s3.bucket("fractal-daikawano").object("/home/ubuntu/workspace/fractal-bot/tmp/julia.png")
+    obj.write(file: "julia.png")
     
     sender.reply({ text: "名詞: #{rep_m}" })
     sender.reply({ text: "動詞: #{rep_d}" })
@@ -47,7 +48,7 @@ obj = s3.bucket("fractal-daikawano").object("http://s3-ap-northeast-1.amazonaws.
     sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんこんにちは" })
     sender.reply({ "attachment": {
                    "type": "image",
-                   "payload": {"url": obj}}
+                   "payload": {"url": "http://fractal-daikawano.s3-website-ap-northeast-1.amazonaws.com/julia.png"}}
                 })
   end
   def delivery(event, sender)
