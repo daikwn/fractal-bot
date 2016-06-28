@@ -10,14 +10,12 @@ gem 'pg', group: :production
 # Use SCSS for stylesheets
 gem 'aws-sdk', '~> 2'
 gem 'sass-rails', '~> 5.0'
-gem 'paperclip'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-gem 'carrierwave'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -38,7 +36,6 @@ gem 'messenger-bot'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'gon'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
