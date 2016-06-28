@@ -1,5 +1,10 @@
 require 'yahoo_parse_api'
 require 'aws-sdk'
+
+AWS.config(
+  :access_key_id => 'AKIAJ5ZQBMY4GW6W6PQQ',
+  :secret_access_key => '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')
+
 class MessengerBotController < ActionController::Base
   def message(event, sender)
     YahooParseApi::Config.app_id = 'dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-'
@@ -32,12 +37,11 @@ class MessengerBotController < ActionController::Base
     rep_jd = jodoushi.count
     rep_sp = spword.count
     system ('python fractal.py')
+    s3 = AWS::S3.new "ap-northeast-1" 
+    s3.buckets['fractal-daikawano']
+    o = o.bucket.objects["/home/ubuntu/workspace/fractal-bot/tmp/julia.png"]
+    o.write(file: "julia.png")
     
-    s3 = Aws::S3::Resource.new(access_key_id: "AKIAJ5ZQBMY4GW6W6PQQ",
-                               secret_access_key:  "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",
-                               region: "ap-northeast-1")
-    obj = s3.bucket("fractal-daikawano").object("http://fractal-daikawano.s3-website-ap-northeast-1.amazonaws.com/julia.png")
-    obj.write(file: "/home/ubuntu/workspace/fractal-bot/tmp/julia.png")
     
     sender.reply({ text: "名詞: #{rep_m}" })
     sender.reply({ text: "動詞: #{rep_d}" })
