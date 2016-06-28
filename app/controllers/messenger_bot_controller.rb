@@ -1,9 +1,4 @@
 require 'yahoo_parse_api'
-require 'aws-sdk'
-
-AWS.config(
-  :access_key_id => 'AKIAJ5ZQBMY4GW6W6PQQ',
-  :secret_access_key => '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')
 
 class MessengerBotController < ActionController::Base
   def message(event, sender)
@@ -37,10 +32,6 @@ class MessengerBotController < ActionController::Base
     rep_jd = jodoushi.count
     rep_sp = spword.count
     system ('python fractal.py')
-    s3 = AWS::S3.new "ap-northeast-1" 
-    s3.buckets['fractal-daikawano']
-    o = o.bucket.objects["/home/ubuntu/workspace/fractal-bot/tmp/julia.png"]
-    o.write(file: "julia.png")
     
     
     sender.reply({ text: "名詞: #{rep_m}" })
@@ -49,10 +40,6 @@ class MessengerBotController < ActionController::Base
     sender.reply({ text: "助動詞: #{rep_jd}" })
     sender.reply({ text: "特殊: #{rep_sp}" })
     sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんこんにちは" })
-    sender.reply({ "attachment": {
-                   "type": "image",
-                   "payload": {"url": "http://fractal-daikawano.s3-website-ap-northeast-1.amazonaws.com/julia.png"}}
-                })
   end
   def delivery(event, sender)
   end
