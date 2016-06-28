@@ -34,10 +34,10 @@ class MessengerBotController < ActionController::Base
     rep_sp = spword.count
     system ('python fractal.py')
     
-    s3 = Aws::S3::Resource.new(access_key_id: "AKIAJ5ZQBMY4GW6W6PQQ",
+s3 = Aws::S3::Resource.new(access_key_id: "AKIAJ5ZQBMY4GW6W6PQQ",
                       secret_access_key:  "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",
                       region: "ap-northeast-1")
-    obj = s3.bucket("fractal-daikawano").object("http://s3-ap-northeast-1.amazonaws.com/fractal-daikawano")
+obj = s3.bucket("fractal-daikawano").object("http://s3-ap-northeast-1.amazonaws.com/fractal-daikawano")
     
     sender.reply({ text: "名詞: #{rep_m}" })
     sender.reply({ text: "動詞: #{rep_d}" })
@@ -50,10 +50,8 @@ class MessengerBotController < ActionController::Base
                    "payload": {"url": obj}}
                 })
   end
-  
   def delivery(event, sender)
   end
-  
   def postback(event, sender)
     payload = event["postback"]["payload"]
     case payload
