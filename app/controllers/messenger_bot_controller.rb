@@ -1,5 +1,8 @@
 require 'yahoo_parse_api'
+<<<<<<< HEAD
 require 'aws-sdk'
+=======
+>>>>>>> parent of 38d6da3... s
 
 class MessengerBotController < ActionController::Base
   def message(event, sender)
@@ -32,15 +35,23 @@ class MessengerBotController < ActionController::Base
     rep_j = joshi.count
     rep_jd = jodoushi.count
     rep_sp = spword.count
+<<<<<<< HEAD
     system ('python fractal.py')
     
     
+=======
+    # profile = sender.get_profile(field) # default field [:locale, :timezone, :gender, :first_name, :last_name, :profile_pic]
+>>>>>>> parent of 38d6da3... s
     sender.reply({ text: "名詞: #{rep_m}" })
     sender.reply({ text: "動詞: #{rep_d}" })
     sender.reply({ text: "助詞: #{rep_j}" })
     sender.reply({ text: "助動詞: #{rep_jd}" })
     sender.reply({ text: "特殊: #{rep_sp}" })
     sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんこんにちは" })
+<<<<<<< HEAD
+=======
+  end
+>>>>>>> parent of 38d6da3... s
 
   end
   def delivery(event, sender)
