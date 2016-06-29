@@ -89,6 +89,13 @@ pattern.add_color_stop(1.0, :blue)
     sender.reply({ text: "形容詞: #{rep_ky}" })
     sender.reply({ text: "あなたの得点: #{score.ceil}" })
     sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんこんにちは" })
+    sender.reply({ "attachment": {
+                "type": "image",
+                "payload": {
+                "url": "./tmp/score.png"}
+                            }
+                })
+    
     
   end
   def delivery(event, sender)
