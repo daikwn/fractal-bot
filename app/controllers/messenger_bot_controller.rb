@@ -4,10 +4,13 @@ class MessengerBotController < ActionController::Base
   def message(event, sender)
     YahooParseApi::Config.app_id = 'dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-'
     parse_api = YahooParseApi::Parse.new
+    profile = sender.get_profile[:body] # default field [locale, timezone, gender, first_name, last_name, profile_pic]
+    text = event['message']['text']
+    
     profile = sender.get_profile[:body]
     profile_last_name = profile['last_name']
     profile_first_name = profile['first_name']
-    result = parse_api.parse(event['message']['text'], {
+    result = parse_api.parse(text, {
              results: 'ma,uniq',
              uniq_filter: '9|10'})
     bot_rep = result['ResultSet']['ma_result']['word_list']['word']
