@@ -60,18 +60,20 @@ class MessengerBotController < ActionController::Base
     sender.reply({ text: "形容詞の数: #{rep_ky}" })
     sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点: #{score.ceil}" })
      
-    if  0 < score < 20 then
+    if  0 < score < 20
       sender.reply({ text: "論外ですね" })
-    elsif 21 < score < 50 then
+    elsif 21 < score < 50
       sender.reply({ text: "ちょっと文章が少なすぎるのではないでしょうか？もう少し文章を長くしてみるいいかもしれませんね。" })
-    elsif 51 < score < 80 then
+    elsif 51 < score < 80
       sender.reply({ text: "いい感じです。もう少しいろいろな表現をしてみると更にスコアがあがる…かもしれません" })
-    elsif 81 < score < 99 then
+    elsif 81 < score < 99
       sender.reply({ text: "もはやあなたが川端康成です。" })
     else
       sender.reply({ text: "ﾋﾞｭｰﾃｨﾌｫｰ" })
     end
+    
   end
+  
   def delivery(event, sender)
   end
   def postback(event, sender)
