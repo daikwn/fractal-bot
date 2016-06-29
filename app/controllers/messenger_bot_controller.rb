@@ -41,12 +41,24 @@ class MessengerBotController < ActionController::Base
     rep_hk = hukushi.count
     rep_ky = keiyoushi.count
     
+    usercountTO = rep_m + rep_d + rep_j + rep_jd + rep_hk + rep_ky
+    userSL_m = (0.3229 - rep_m/usercountTO).abs
+    userSL_d = (0.3229 - rep_d/usercountTO).abs
+    userSL_j = (0.3229 - rep_j/usercountTO).abs
+    userSL_jd = (0.3229 - rep_jd/usercountTO).abs
+    userSL_hk = (0.3229 - rep_hk/usercountTO).abs
+    userSL_ky = (0.3229 - rep_ky/usercountTO).abs
+    userslTO = userSL_m + userSL_d + userSL_j + userSL_jd + userSL_hk + userSL_ky
+    
+    score = 100*(1-userslTO)
+    
     sender.reply({ text: "名詞: #{rep_m}" })
     sender.reply({ text: "動詞: #{rep_d}" })
     sender.reply({ text: "助詞: #{rep_j}" })
     sender.reply({ text: "助動詞: #{rep_jd}" })
     sender.reply({ text: "副詞: #{rep_hk}" })
     sender.reply({ text: "形容詞: #{rep_ky}" })
+    sender.reply({ text: "あなたの得点: #{score}" })
     sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんこんにちは" })
     
   end
