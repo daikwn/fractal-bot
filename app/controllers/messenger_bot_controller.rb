@@ -1,31 +1,7 @@
-class MessengerBotController < ActionController::Base
-  
 require 'yahoo_parse_api'
 require 'cairo'
 
-format = Cairo::FORMAT_ARGB32
-width  = 380
-height = 205
-
-@surface = Cairo::ImageSurface.new(format, width, height)
-@context = Cairo::Context.new(@surface)
-
-# 背景
-@context.set_source_rgb(0.1, 0.1, 0.5)
-@context.rectangle(0, 0, width, height)
-@context.fill
-
-# 文字色（グラデーション）
-pattern = Cairo::LinearPattern.new(0, 0, width, height)
-pattern.add_color_stop(0.0, :aqua)
-pattern.add_color_stop(1.0, :blue)
-@context.set_source(pattern)
-
-  def show_text(context, x, y, size, text)
-    context.move_to(x, y)
-    context.font_size = size
-    context.show_text(text)
-  end
+class MessengerBotController < ActionController::Base
   
   def message(event, sender)
     YahooParseApi::Config.app_id = 'dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-'
@@ -78,9 +54,6 @@ pattern.add_color_stop(1.0, :blue)
     
     score = 100*(1-userslTO.to_f)
     
-    show_text(@context,  50, 100, 70, "score")
-    @surface.write_to_png("./tmp/score.png")
-    
     sender.reply({ text: "名詞: #{rep_m}" })
     sender.reply({ text: "動詞: #{rep_d}" })
     sender.reply({ text: "助詞: #{rep_j}" })
@@ -88,14 +61,6 @@ pattern.add_color_stop(1.0, :blue)
     sender.reply({ text: "副詞: #{rep_hk}" })
     sender.reply({ text: "形容詞: #{rep_ky}" })
     sender.reply({ text: "あなたの得点: #{score.ceil}" })
-    sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんこんにちは" })
-    sender.reply({ "attachment": {
-                "type": "image",
-                "payload": {
-                "url": "./tmp/score.png"}
-                            }
-                })
-    
     
   end
   def delivery(event, sender)
