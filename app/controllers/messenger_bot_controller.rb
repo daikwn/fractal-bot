@@ -31,19 +31,7 @@ class MessengerBotController < ActionController::Base
     end
   end
   def delivery(event, sender)
-  end
-  def postback(event, sender)
-    payload = event["postback"]["payload"]
-    
-    case payload
-    when "OVER","UNDER"
-    
-    if payload == "OVER"
-      
-      sender.reply({ text: "一文か二文程度で短文を入力してください。" })
-      
-      text = event['message']['text']
-    
+    text = event['message']['text']
       YahooParseApi::Config.app_id = 'dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-'
       parse_api = YahooParseApi::Parse.new
       profile = sender.get_profile[:body] # default field [locale, timezone, gender, first_name, last_name, profile_pic]
@@ -111,6 +99,18 @@ class MessengerBotController < ActionController::Base
         sender.reply({ text: "ﾋﾞｭｰﾃｨﾌｫｰ" })
       end
     
+  end
+  
+  def postback(event, sender)
+    payload = event["postback"]["payload"]
+    
+    case payload
+    when "OVER","UNDER"
+    
+    if payload == "OVER"
+      sender.reply({ text: "一文か二文程度で短文を入力してください。" })
+      delivery(message,sender)
+      
     elsif postback == "UNDER"
       sender.reply({ text: "そっかぁ…" })
     end
