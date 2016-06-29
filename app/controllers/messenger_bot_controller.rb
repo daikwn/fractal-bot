@@ -1,5 +1,4 @@
 require 'yahoo_parse_api'
-require 'aws-sdk'
 
 class MessengerBotController < ActionController::Base
   def message(event, sender)
@@ -32,8 +31,6 @@ class MessengerBotController < ActionController::Base
     rep_j = joshi.count
     rep_jd = jodoushi.count
     rep_sp = spword.count
-    system ('python fractal.py')
-    
     
     sender.reply({ text: "名詞: #{rep_m}" })
     sender.reply({ text: "動詞: #{rep_d}" })
