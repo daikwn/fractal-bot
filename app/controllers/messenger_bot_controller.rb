@@ -3,6 +3,43 @@ require 'yahoo_parse_api'
 class MessengerBotController < ActionController::Base
   
   def message(event, sender)
+    text = event['message']['text']
+    
+    if text.end_with?("起動") 
+       sender.reply({ "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text":"川端康成日本語きれいさ判定BOTへようこそ！",
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"使ってみる。",
+                        "payload":"OVER"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"興味ない。",
+                        "payload":"UNDER"
+                    }
+                ]
+            }
+          }
+        })
+      else
+        sender.reply({ text: "【起動】で動きます。" })
+    end
+  end
+  def delivery(event, sender)
+  end
+  def postback(event, sender)
+    payload = event["postback"]["payload"]
+    
+    case payload
+    when "OVER","UNDER"
+    
+    if payload == "OVER"
+    
     YahooParseApi::Config.app_id = 'dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-'
     parse_api = YahooParseApi::Parse.new
     profile = sender.get_profile[:body] # default field [locale, timezone, gender, first_name, last_name, profile_pic]
@@ -10,7 +47,6 @@ class MessengerBotController < ActionController::Base
     profile = sender.get_profile[:body]
     profile_last_name = profile['last_name']
     profile_first_name = profile['first_name']
-    
     result = parse_api.parse(text, {
              results: 'ma,uniq',
              uniq_filter: '1|2'})
@@ -53,23 +89,30 @@ class MessengerBotController < ActionController::Base
     
     score = 100*(1-userslTO.to_f)
     
-    sender.reply({ text: "名詞: #{rep_m}" })
-    sender.reply({ text: "動詞: #{rep_d}" })
-    sender.reply({ text: "助詞: #{rep_j}" })
-    sender.reply({ text: "助動詞: #{rep_jd}" })
-    sender.reply({ text: "副詞: #{rep_hk}" })
-    sender.reply({ text: "形容詞: #{rep_ky}" })
-    sender.reply({ text: "あなたの得点: #{score.ceil}" })
-    sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんこんにちは" })
+    sender.reply({ text: "名詞の数: #{rep_m}" })
+    sender.reply({ text: "動詞の数: #{rep_d}" })
+    sender.reply({ text: "助詞の数: #{rep_j}" })
+    sender.reply({ text: "助動詞の数: #{rep_jd}" })
+    sender.reply({ text: "副詞の数: #{rep_hk}" })
+    sender.reply({ text: "形容詞の数: #{rep_ky}" })
+    sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点: #{score.ceil}" })
+     
+    if  0 < score < 20 then
+      sender.reply({ text: "論外ですね" })
+    elsif 21 < score < 50 then
+      sender.reply({ text: "ちょっと文章が少なすぎるのではないでしょうか？もう少し文章を長くしてみるいいかもしれませんね。" })
+    elsif 51 < score < 80 then
+      sender.reply({ text: "いい感じです。もう少しいろいろな表現をしてみると更にスコアがあがる…かもしれません" })
+    elsif 81 < score < 99 then
+      sender.reply({ text: "もはやあなたが川端康成です。" })
+    else
+      sender.reply({ text: "ﾋﾞｭｰﾃｨﾌｫｰ" })
+    end
     
+    elsif postback == "UNDER"
+      sender.reply({ text: "そっかぁ…" })
+    end
     
-  end
-  def delivery(event, sender)
-  end
-  def postback(event, sender)
-    payload = event["postback"]["payload"]
-    case payload
-    when :something
     end
   end
 end
