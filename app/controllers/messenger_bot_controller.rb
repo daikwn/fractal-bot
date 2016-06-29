@@ -79,7 +79,7 @@ pattern.add_color_stop(1.0, :blue)
     score = 100*(1-userslTO.to_f)
     
     show_text(@context,  50, 100, 70, "score")
-    @surface.write_to_png(".tmp/score.png")
+    @surface.write_to_png("./tmp/score.png")
     
     sender.reply({ text: "名詞: #{rep_m}" })
     sender.reply({ text: "動詞: #{rep_d}" })
