@@ -58,7 +58,7 @@ class MessengerBotController < ActionController::Base
     sender.reply({ text: "助動詞: #{rep_jd}" })
     sender.reply({ text: "副詞: #{rep_hk}" })
     sender.reply({ text: "形容詞: #{rep_ky}" })
-    sender.reply({ text: "あなたの得点: #{score}" })
+    sender.reply({ text: "あなたの得点: #{score.ceil}" })
     sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんこんにちは" })
     
   end
