@@ -43,11 +43,11 @@ class MessengerBotController < ActionController::Base
     
     usercountTO = rep_m + rep_d + rep_j + rep_jd + rep_hk + rep_ky
     userSL_m = (0.3229 - rep_m/usercountTO).abs
-    userSL_d = (0.3229 - rep_d/usercountTO).abs
-    userSL_j = (0.3229 - rep_j/usercountTO).abs
-    userSL_jd = (0.3229 - rep_jd/usercountTO).abs
-    userSL_hk = (0.3229 - rep_hk/usercountTO).abs
-    userSL_ky = (0.3229 - rep_ky/usercountTO).abs
+    userSL_d = (0.1189 - rep_d/usercountTO).abs
+    userSL_j = (0.4164 - rep_j/usercountTO).abs
+    userSL_jd = (0.1416 - rep_jd/usercountTO).abs
+    userSL_hk = (0.0226 - rep_hk/usercountTO).abs
+    userSL_ky = (0.0283 - rep_ky/usercountTO).abs
     userslTO = userSL_m + userSL_d + userSL_j + userSL_jd + userSL_hk + userSL_ky
     
     score = 100*(1-userslTO)
