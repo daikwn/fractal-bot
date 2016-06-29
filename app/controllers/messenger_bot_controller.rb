@@ -6,13 +6,14 @@ class MessengerBotController < ActionController::Base
     parse_api = YahooParseApi::Parse.new
     profile = sender.get_profile[:body] # default field [locale, timezone, gender, first_name, last_name, profile_pic]
     text = event['message']['text']
-    
     profile = sender.get_profile[:body]
     profile_last_name = profile['last_name']
     profile_first_name = profile['first_name']
+    
+    
     result = parse_api.parse(text, {
              results: 'ma,uniq',
-             uniq_filter: '9|10'})
+             uniq_filter: '1|2'})
     bot_rep = result['ResultSet']['ma_result']['word_list']['word']
     meishi = bot_rep.select do |b|
       b["pos"] == "名詞"
@@ -26,23 +27,28 @@ class MessengerBotController < ActionController::Base
     jodoushi = bot_rep.select do |b|
       b["pos"] == "助動詞"
     end
-    spword = bot_rep.select do |b|
-      b["pos"] == "特殊"
+    hukushi = bot_rep.select do |b|
+      b["pos"] == "副詞"
     end
+    keiyoushi = bot_rep.select do |b|
+      b["pos"] == "形容詞"
+    end
+
     rep_m = meishi.count
     rep_d = doushi.count
     rep_j = joshi.count
     rep_jd = jodoushi.count
-    rep_sp = spword.count
+    rep_hk = hukushi.count
+    rep_ky = keiyoushi.count
     
     sender.reply({ text: "名詞: #{rep_m}" })
     sender.reply({ text: "動詞: #{rep_d}" })
     sender.reply({ text: "助詞: #{rep_j}" })
     sender.reply({ text: "助動詞: #{rep_jd}" })
-    sender.reply({ text: "特殊: #{rep_sp}" })
+    sender.reply({ text: "副詞: #{rep_hk}" })
+    sender.reply({ text: "形容詞: #{rep_ky}" })
     sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんこんにちは" })
-
-
+    
   end
   def delivery(event, sender)
   end
