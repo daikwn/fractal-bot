@@ -3,6 +3,7 @@ require 'yahoo_parse_api'
 @@key = 0
   
 def message(event, sender)
+  sender.reply({text: "#{@@key}"})
   profile = sender.get_profile[:body]
   profile_last_name = profile['last_name']
   profile_first_name = profile['first_name'] 
