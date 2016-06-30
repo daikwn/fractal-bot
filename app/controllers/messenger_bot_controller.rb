@@ -8,30 +8,29 @@ def message(event, sender)
   profile_first_name = profile['first_name'] 
   text = event['message']['text']
     
-  if text.end_with?("起動")  &&  @key == 0
+  if text.end_with?("起動")  &&  @key == 0 then
     sender.reply({ "attachment":{
-            "type":"template",
-            "payload":{
-                "template_type":"button",
-                "text":"川端康成による美しい日本語判定BOTへようこそ！",
-                "buttons":[
-                    {
-                        "type":"postback",
-                        "title":"やってみる",
-                        "payload":"OVER"
-                    },
-                    {
-                        "type":"postback",
-                        "title":"興味ない",
-                        "payload":"UNDER"
-                    }
-                ]
-            }
-         }
-      })
-  elsif @key == 0
+                   "type":"template",
+                   "payload":{"template_type":"button",
+                              "text":"川端康成による美しい日本語判定BOTへようこそ！",
+                              "buttons":[
+                             {
+                              "type":"postback",
+                              "title":"やってみる",
+                              "payload":"OVER"
+                             },
+                             {
+                              "type":"postback",
+                              "title":"興味ない",
+                              "payload":"UNDER"
+                             }
+                                        ]
+                             }
+                                }
+  })
+  elsif @key == 0 then
     sender.reply({text: "【起動】で起動します。"})
-  elsif @key == 1
+  elsif @key == 1 then
     YahooParseApi::Config.app_id = 'dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-'
     parse_api = YahooParseApi::Parse.new
     result = parse_api.parse(text, {
@@ -85,11 +84,11 @@ def message(event, sender)
     
     @key = 0
     
-    if score >=0 then
+     if score >=0 then
       sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点: #{score.ceil}" })
-    else
+     else
       sender.reply({text: "0点です。"})
-    end
+     end
   
   end
 end
