@@ -4,6 +4,10 @@ class MessengerBotController < ActionController::Base
 @key = 0
   
 def message(event, sender)
+  text = event['message']['text']
+  profile = sender.get_profile[:body]
+  profile_last_name = profile['last_name']
+  profile_first_name = profile['first_name'] 
     
   if text.end_with?("起動")  &&  @key == 0
     sender.reply({ "attachment":{
@@ -31,11 +35,6 @@ def message(event, sender)
   elsif @key == 1
     YahooParseApi::Config.app_id = 'dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-'
     parse_api = YahooParseApi::Parse.new
-    profile = sender.get_profile[:body] # default field [locale, timezone, gender, first_name, last_name, profile_pic]
-    text = event['message']['text']
-    profile = sender.get_profile[:body]
-    profile_last_name = profile['last_name']
-    profile_first_name = profile['first_name']
     result = parse_api.parse(text, {
              results: 'ma,uniq',
              uniq_filter: '1|2'})
