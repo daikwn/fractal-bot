@@ -13,16 +13,16 @@ def message(event, sender)
     sender.reply({ "attachment":{
                    "type":"template",
                    "payload":{"template_type":"button",
-                              "text":"川端康成による美しい日本語判定BOTへようこそ！",
+                              "text":"川端康成に学ぶ。美しい日本語判定BOTへようこそ！",
                               "buttons":[
                              {
                               "type":"postback",
-                              "title":"やってみる",
+                              "title":"やってみる。",
                               "payload":"OVER"
                              },
                              {
                               "type":"postback",
-                              "title":"興味ない",
+                              "title":"興味ない。",
                               "payload":"UNDER"
                              }
                                         ]
@@ -99,7 +99,7 @@ def message(event, sender)
     elsif 40 < score && score <= 60
       sender.reply({ text: "★うーん…表現に工夫を加えてみましょう。比喩表現を入れてみるとか？"})
     elsif 60 < score && score <= 80
-      sender.reply({ text: "★なかなかハイスコアです。ちなみに川端康成の文章をテストすると平均85点くらいです。"})
+      sender.reply({ text: "★なかなかハイスコアです。ちなみに川端康成の文章を判定すると平均85点くらいです。"})
     elsif 80 < score && score <= 100
       sender.reply({ text: "★ﾋﾞｭｰﾃｨﾌｫｰ"})
     elsif score <= 0
@@ -116,7 +116,7 @@ end
     case payload
     when "OVER"
       @@key = 1
-      sender.reply({ text: "一文か二文程度で文章を記入してください。" })
+      sender.reply({ text: "一文から二文程度で、判定したい文章を記入してください。" })
     when "UNDER"
       @@key = 0
       sender.reply({ text: "そっすか…" })
