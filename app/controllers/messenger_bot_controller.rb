@@ -82,7 +82,7 @@ def message(event, sender)
     sender.reply({ text: "副詞の数: #{rep_hk}" })
     sender.reply({ text: "形容詞の数: #{rep_ky}" })
     
-    @key = 0
+    @@key = 0
     
      if score >0
       sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点: #{score.ceil}" })
@@ -103,7 +103,7 @@ end
       @@key = 1
       sender.reply({ text: "一文か二文程度で文章を記入してください。" })
     when "UNDER"
-      @key = 0
+      @@key = 0
       sender.reply({ text: "そっすか…" })
     end
   end
