@@ -7,6 +7,8 @@ def message(event, sender)
   profile_last_name = profile['last_name']
   profile_first_name = profile['first_name'] 
   text = event['message']['text']
+  
+  sender.reply({ text: "デバックＯＫ" })
     
   if text == "起動"  &&  @key == 0
     sender.reply({ "attachment":{
@@ -84,9 +86,9 @@ def message(event, sender)
     
     @key = 0
     
-     if score >=0
+     if score >0
       sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点: #{score.ceil}" })
-     else
+     elsif score <= 0
       sender.reply({text: "0点です。"})
      end
   
