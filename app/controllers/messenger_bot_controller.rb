@@ -83,7 +83,6 @@ def message(event, sender)
     sender.reply({ text: "助動詞の数: #{rep_jd}" })
     sender.reply({ text: "副詞の数: #{rep_hk}" })
     sender.reply({ text: "形容詞の数: #{rep_ky}" })
-
     
     if 0 < score
       sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点: #{score.ceil}" })
