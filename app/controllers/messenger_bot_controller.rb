@@ -1,5 +1,6 @@
 class MessengerBotController < ActionController::Base
 require 'yahoo_parse_api'
+@@key = 0
   
 def message(event, sender)
   profile = sender.get_profile[:body]
@@ -30,7 +31,8 @@ def message(event, sender)
   })
   elsif text != "起動" && @@key != 1
     sender.reply({text: "【起動】で起動します。"})
-  elsif @@key == 1
+    
+  elsif text != "起動" && @@key == 1
     YahooParseApi::Config.app_id = 'dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-'
     parse_api = YahooParseApi::Parse.new
     result = parse_api.parse(text, {
