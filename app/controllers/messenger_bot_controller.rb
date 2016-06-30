@@ -90,21 +90,9 @@ def message(event, sender)
       sender.reply({ text: "0点です。"})
     end
     
-    if 0 < score <= 20
-      sender.reply({ text: "★やる気あんのか"})
-    elsif 20 < score <= 40
-      sender.reply({ text: "★少し文章が短すぎるかもしれませんね。もう一文増やしてみればよいのでは？"})
-    elsif 40 < score <= 60
-      sender.reply({ text: "★うーん…表現に工夫を加えてみましょう。比喩表現を入れてみるとか？"})
-    elsif 60 < score <= 80
-      sender.reply({ text: "★なかなかハイスコアです。ちなみに川端康成の文章をテストすると平均85点くらいです。"})
-    elsif 80 < score <= 100
-      sender.reply({ text: "★ﾋﾞｭｰﾃｨﾌｫｰ"})
-    elsif score <= 0
-      sender.reply({ text: "文章になってません。"})
-    end
-    
     @@key = 0
+    
+    sender.reply({ text: "0点です。"})
     
   end
 end
