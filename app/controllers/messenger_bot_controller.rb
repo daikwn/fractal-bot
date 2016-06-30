@@ -8,6 +8,7 @@ def message(event, sender)
   text = event['message']['text']
   
   if text == "起動" 
+    @key = 0
     sender.reply({ "attachment":{
                    "type":"template",
                    "payload":{"template_type":"button",
