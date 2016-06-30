@@ -84,8 +84,6 @@ def message(event, sender)
     sender.reply({ text: "副詞の数: #{rep_hk}" })
     sender.reply({ text: "形容詞の数: #{rep_ky}" })
     
-    @@key = 0
-    
      if 0 < score <= 20
       sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点: #{score.ceil}" })
       sender.reply({text: "★やる気あんのか"})
@@ -104,6 +102,8 @@ def message(event, sender)
      elsif score <= 0
       sender.reply({text: "0点です。"})
      end
+     
+     @@key = 0
   end
 end
   
