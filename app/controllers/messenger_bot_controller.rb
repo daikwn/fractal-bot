@@ -1,8 +1,34 @@
 require 'yahoo_parse_api'
+@key = 0
 
 class MessengerBotController < ActionController::Base
   
-  def message(event, sender)
+def message(event, sender)
+    
+  if text.end_with?("起動")  &&  @key == 0
+    sender.reply({ "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text":"川端康成による美しい日本語判定BOTへようこそ！",
+                "buttons":[
+                    {
+                        "type":"postback",
+                        "title":"やってみる",
+                        "payload":"OVER"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"興味ない",
+                        "payload":"UNDER"
+                    }
+                ]
+            }
+         }
+      })
+  elsif @key == 0
+    sender.reply({text: "【起動】で起動します。"})
+  elsif @key == 1
     YahooParseApi::Config.app_id = 'dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-'
     parse_api = YahooParseApi::Parse.new
     profile = sender.get_profile[:body] # default field [locale, timezone, gender, first_name, last_name, profile_pic]
@@ -59,21 +85,28 @@ class MessengerBotController < ActionController::Base
     sender.reply({ text: "副詞の数: #{rep_hk}" })
     sender.reply({ text: "形容詞の数: #{rep_ky}" })
     
+    @key = 0
+    
     if score >=0 then
       sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点: #{score.ceil}" })
     else
       sender.reply({text: "0点です。"})
     end
   
-    
   end
+end
   
   def delivery(event, sender)
   end
+  
   def postback(event, sender)
     payload = event["postback"]["payload"]
     case payload
-    when :something
+    when "OVER"
+      sender.reply({ text: "一文か二文程度で文章を記入してください。" })
+      @key = 1
+    when "UNDER"
+      sender.reply({ text: "そっすか…" })
     end
   end
 end
