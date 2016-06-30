@@ -1,8 +1,8 @@
-require 'yahoo_parse_api'
 class MessengerBotController < ActionController::Base
-@key = 0
+require 'yahoo_parse_api'
   
 def message(event, sender)
+  @key = 0
   profile = sender.get_profile[:body]
   profile_last_name = profile['last_name']
   profile_first_name = profile['first_name'] 
