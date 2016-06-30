@@ -8,7 +8,7 @@ def message(event, sender)
   profile_first_name = profile['first_name'] 
   text = event['message']['text']
     
-  if text == "起動"  &&  @key == 0 then
+  if text == "起動"  &&  @key == 0
     sender.reply({ "attachment":{
                    "type":"template",
                    "payload":{"template_type":"button",
@@ -28,9 +28,9 @@ def message(event, sender)
                              }
                                 }
   })
-  elsif text != "起動" && @key == 0 then
+  elsif text != "起動" && @key == 0
     sender.reply({text: "【起動】で起動します。"})
-  elsif text != "起動" && @key == 1 then
+  elsif text != "起動" && @key == 1
     YahooParseApi::Config.app_id = 'dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-'
     parse_api = YahooParseApi::Parse.new
     result = parse_api.parse(text, {
@@ -84,7 +84,7 @@ def message(event, sender)
     
     @key = 0
     
-     if score >=0 then
+     if score >=0
       sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点: #{score.ceil}" })
      else
       sender.reply({text: "0点です。"})
