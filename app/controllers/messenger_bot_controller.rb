@@ -99,8 +99,8 @@ end
     payload = event["postback"]["payload"]
     case payload
     when "OVER"
-      sender.reply({ text: "一文か二文程度で文章を記入してください。" })
       @key = 1
+      sender.reply({ text: "一文か二文程度で文章を記入してください。" })
     when "UNDER"
       sender.reply({ text: "そっすか…" })
     end
