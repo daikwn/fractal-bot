@@ -8,7 +8,7 @@ def message(event, sender)
   text = event['message']['text']
   
   if text == "起動" 
-    @key = 0
+    @@key = 0
     sender.reply({ "attachment":{
                    "type":"template",
                    "payload":{"template_type":"button",
@@ -28,9 +28,9 @@ def message(event, sender)
                              }
                                 }
   })
-  elsif text != "起動" && @key != 1
+  elsif text != "起動" && @@key != 1
     sender.reply({text: "【起動】で起動します。"})
-  elsif @key == 1
+  elsif @@key == 1
     YahooParseApi::Config.app_id = 'dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-'
     parse_api = YahooParseApi::Parse.new
     result = parse_api.parse(text, {
@@ -100,9 +100,10 @@ end
     payload = event["postback"]["payload"]
     case payload
     when "OVER"
-      @key = 1
+      @@key = 1
       sender.reply({ text: "一文か二文程度で文章を記入してください。" })
     when "UNDER"
+      @key = 0
       sender.reply({ text: "そっすか…" })
     end
   end
