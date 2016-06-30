@@ -112,12 +112,12 @@ def message(event, sender)
     
     if 0 < score
       show_text(@context,  40, 170, 140, "score.ceil")
-      @surface.write_to_png("./tmp/score.png")
+      @surface.write_to_png("/tmp/score.png")
       sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点" })
       sender.reply({ "attachment": {
                 "type": "image",
                 "payload": {
-                "url": './tmp/score.png'
+                "url": '/tmp/score.png'
                         }
                                             }
                           })
