@@ -1,13 +1,12 @@
 require 'yahoo_parse_api'
 class MessengerBotController < ActionController::Base
-  
 @key = 0
   
 def message(event, sender)
-  text = event['message']['text']
   profile = sender.get_profile[:body]
   profile_last_name = profile['last_name']
   profile_first_name = profile['first_name'] 
+  text = event['message']['text']
     
   if text.end_with?("起動")  &&  @key == 0
     sender.reply({ "attachment":{
