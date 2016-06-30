@@ -2,13 +2,12 @@ class MessengerBotController < ActionController::Base
 require 'yahoo_parse_api'
   
 def message(event, sender)
-  @key = 0
   profile = sender.get_profile[:body]
   profile_last_name = profile['last_name']
   profile_first_name = profile['first_name'] 
   text = event['message']['text']
   
-  sender.reply({ text: "デバックＯＫ" })
+  @key = 0
     
   if text == "起動"  &&  @key == 0
     sender.reply({ "attachment":{
