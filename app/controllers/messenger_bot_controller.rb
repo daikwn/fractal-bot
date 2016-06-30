@@ -1,7 +1,7 @@
 require 'yahoo_parse_api'
-@key = 0
-
 class MessengerBotController < ActionController::Base
+  
+@key = 0
   
 def message(event, sender)
     
