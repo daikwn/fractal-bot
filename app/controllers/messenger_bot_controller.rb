@@ -67,12 +67,12 @@ def message(event, sender)
     rep_ky = keiyoushi.count
     
     usercountTO = rep_m + rep_d + rep_j + rep_jd + rep_hk + rep_ky
-    userSL_m = (0.3229 - rep_m/usercountTO.to_f).abs
-    userSL_d = (0.1189 - rep_d/usercountTO.to_f).abs
-    userSL_j = (0.4164 - rep_j/usercountTO.to_f).abs
-    userSL_jd = (0.1416 - rep_jd/usercountTO.to_f).abs
-    userSL_hk = (0.0226 - rep_hk/usercountTO.to_f).abs
-    userSL_ky = (0.0283 - rep_ky/usercountTO.to_f).abs
+    userSL_m = (0.297420334 - rep_m/usercountTO.to_f).abs
+    userSL_d = (0.124430956 - rep_d/usercountTO.to_f).abs
+    userSL_j = (0.379362671 - rep_j/usercountTO.to_f).abs
+    userSL_jd = (0.145675266 - rep_jd/usercountTO.to_f).abs
+    userSL_hk = (0.025796662 - rep_hk/usercountTO.to_f).abs
+    userSL_ky = (0.027314112 - rep_ky/usercountTO.to_f).abs
     userslTO = userSL_m + userSL_d + userSL_j + userSL_jd + userSL_hk + userSL_ky
     
     score = 100*(1-userslTO.to_f)
