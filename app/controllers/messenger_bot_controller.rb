@@ -93,8 +93,6 @@ def message(event, sender)
     
     @@key = 0
     
-
-    
     if 0 < score && score <= 20
       sender.reply({ text: "★やる気あんのか"})
     elsif 20 < score && score <= 40
