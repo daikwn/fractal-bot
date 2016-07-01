@@ -90,7 +90,7 @@ def message(event, sender)
     sender.reply({ text: "形容詞の数: #{rep_ky}" })
     
     if 0 < score
-      sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点: #{score.ceil}" })
+      sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点" })
       BingSearch.account_key = BingAPIKEY
       bing_image = BingSearch.image(scoreSER, limit: 30).shuffle[0]
       if bing_image.nil?
