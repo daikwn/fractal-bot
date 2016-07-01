@@ -1,6 +1,13 @@
 class MessengerBotController < ActionController::Base
 require 'yahoo_parse_api'
+require 'cairo'
 @@key = 0
+
+def show_text(context, x, y, size, text)
+  context.move_to(x, y)
+  context.font_size = size
+  context.show_text(text)
+end
   
 def message(event, sender)
   profile = sender.get_profile[:body]
@@ -84,8 +91,38 @@ def message(event, sender)
     sender.reply({ text: "副詞の数: #{rep_hk}" })
     sender.reply({ text: "形容詞の数: #{rep_ky}" })
     
+    format = Cairo::FORMAT_ARGB32
+    width  = 250
+    height = 250
+
+    @surface = Cairo::ImageSurface.new(format, width, height)
+    @context = Cairo::Context.new(@surface)
+
+    # 背景
+    @context.set_source_rgb(1.0, 1.0, 1.0)
+    @context.rectangle(0, 0, width, height)
+    @context.fill
+
+    # 文字色（グラデーション）
+    pattern = Cairo::LinearPattern.new(0, 0, width, height)
+    pattern.add_color_stop(0.0, :PASTEL_GREEN)
+    pattern.add_color_stop(0.14, :ULTRAMARINE)
+    pattern.add_color_stop(0.28, :PASTEL_PINK)
+    pattern.add_color_stop(0.42, :PEACH_ORANGE)
+    pattern.add_color_stop(0.56, :LEMON)
+    pattern.add_color_stop(0.70, :PASTEL_GREEN)
+    pattern.add_color_stop(0.94, :ULTRAMARINE)
+    @context.set_source(pattern)
+    show_text(@context,  40, 170, 140, "score.ceil")
+    @surface.write_to_png("./app/assets/images/score.png")
+    
     if 0 < score
-      sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点: #{score.ceil}" })
+      sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点" })
+      sender.reply({"attachment":{
+                    "type": "image",
+                    "payload":{"url": "./app/assets/images/score.png"}
+                    }
+                  })
     else
       sender.reply({ text: "0点です。"})
     end
@@ -122,10 +159,4 @@ end
       sender.reply({ text: "そっすか…" })
     end
   end
-end
-
-def show_text(context, x, y, size, text)
-  context.move_to(x, y)
-  context.font_size = size
-  context.show_text(text)
 end
