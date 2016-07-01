@@ -121,17 +121,19 @@ def message(event, sender)
       sender.reply({ "attachment": {
                      "type": "image",
                      "payload": {
-                     "url": "https://www.dac.co.jp/images/sub_txt_07.png"
+                     "url": "./app/assets/images/score.png"
                                 }
                                               }
                             })
+                            
+      filename = "./app/assets/images/score.png"
+      File.unlink filename
     else
       sender.reply({ text: "0点です。"})
     end
     
     @@key = 0
-    filename = './app/assets/images/score.png'
-    File.unlink filename
+
     
     if 0 < score && score <= 20
       sender.reply({ text: "★やる気あんのか"})
