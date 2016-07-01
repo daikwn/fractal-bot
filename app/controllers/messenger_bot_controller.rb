@@ -1,9 +1,8 @@
 class MessengerBotController < ActionController::Base
 require 'yahoo_parse_api'
-require 'searchbing'
+require 'bing-search'
 BingAPIKEY = 'lYikK+t6tN1ecVMq/Td1G5KSN0NxEY7yDISQvfyOT7w'
 @@key = 0
-
   
 def message(event, sender)
   profile = sender.get_profile[:body]
@@ -81,7 +80,7 @@ def message(event, sender)
     userSL_ky = (0.027314112 - rep_ky/usercountTO.to_f).abs
     userslTO = userSL_m + userSL_d + userSL_j + userSL_jd + userSL_hk + userSL_ky
     
-    score = 100*(1-userslTO.to_f)
+    score = 100*(1-userslTO.to_f).ceil
     
     sender.reply({ text: "名詞の数: #{rep_m}" })
     sender.reply({ text: "動詞の数: #{rep_d}" })
@@ -90,17 +89,17 @@ def message(event, sender)
     sender.reply({ text: "副詞の数: #{rep_hk}" })
     sender.reply({ text: "形容詞の数: #{rep_ky}" })
     
-    bing_image = BingSearch.image(score.ceil, limit: 10).shuffle[0]
+    bing_image = BingSearch.image(score, limit: 10).shuffle[0]
     
     if 0 < score
-      sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点: #{score.ceil}" })
+      sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点: #{score}" })
       sender.reply({ "attachment": {
                      "type": "image",
                      "payload": {
                      "url": bing_image.media_url
                           }
                                               }
-                            })
+                          })
     else
       sender.reply({ text: "0点です。"})
     end
