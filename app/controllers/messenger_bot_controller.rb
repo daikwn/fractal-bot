@@ -126,8 +126,7 @@ def message(event, sender)
                                               }
                             })
                             
-      filename = "./app/assets/images/score.png"
-      File.unlink filename
+
     else
       sender.reply({ text: "0点です。"})
     end
