@@ -114,19 +114,20 @@ def message(event, sender)
     pattern.add_color_stop(0.94, :ULTRAMARINE)
     @context.set_source(pattern)
     show_text(@context,  40, 170, 140, "score.ceil")
-    @surface.write_to_png("./app/assets/images/score.png")
+    @surface.write_to_png("./tmp/assets/score.png")
     
     if 0 < score
       sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点" })
       sender.reply({ "attachment": {
                      "type": "image",
                      "payload": {
-                     "url": "./app/assets/images/score.png"
+                     "url": "./tmp/assets/score.png"
                                 }
                                               }
                             })
                             
-
+      filename = "./tmp/assets/score.png"
+      File.unlink filename
     else
       sender.reply({ text: "0点です。"})
     end
