@@ -118,13 +118,7 @@ def message(event, sender)
     
     if 0 < score
       sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点" })
-      sender.reply({ "attachment": {
-                     "type": "image",
-                     "payload": {
-                     "url": "./app/assets/images/score.png"
-                                }
-                                              }
-                            })
+      sender.reply({ image: @context })
                             
       filename = "./app/assets/images/score.png"
       File.unlink filename
