@@ -4,7 +4,7 @@ require 'bing-search'
 BingAPIKEY = 'lYikK+t6tN1ecVMq/Td1G5KSN0NxEY7yDISQvfyOT7w'
 
 @@key = 0
-  
+
 def message(event, sender)
   profile = sender.get_profile[:body]
   profile_last_name = profile['last_name']
@@ -35,8 +35,6 @@ def message(event, sender)
     sender.reply({text: "【起動】で起動します。"})
     
   elsif text != "起動" && @@key == 1
-  
-    
     BingSearch.account_key = BingAPIKEY
     YahooParseApi::Config.app_id = 'dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-'
     parse_api = YahooParseApi::Parse.new
@@ -80,7 +78,7 @@ def message(event, sender)
     userSL_ky = (0.027314112 - rep_ky/usercountTO.to_f).abs
     userslTO = userSL_m + userSL_d + userSL_j + userSL_jd + userSL_hk + userSL_ky
     
-    score = 100*(1-userslTO.to_f).ceil
+    score = 100*(1-userslTO.to_f)
     
     sender.reply({ text: "名詞の数: #{rep_m}" })
     sender.reply({ text: "動詞の数: #{rep_d}" })
@@ -90,9 +88,9 @@ def message(event, sender)
     sender.reply({ text: "形容詞の数: #{rep_ky}" })
     
     if 0 < score
-      sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点: #{score}" })
+      sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点: #{score.ceil}" })
       BingSearch.account_key = BingAPIKEY
-      bing_image = BingSearch.image(score, limit: 30).shuffle[0]
+      bing_image = BingSearch.image("score.ceil", limit: 30).shuffle[0]
       if bing_image.nil?
           sender.reply({ text: "画像が見つかりませんでした" })
       else
