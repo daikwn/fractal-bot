@@ -121,7 +121,7 @@ def message(event, sender)
       sender.reply({ "attachment": {
                      "type": "image",
                      "payload": {
-                     "url": "https://www.dac.co.jp/site_logo.png"
+                     "url": "https://www.dac.co.jp/images/sub_txt_07.png"
                                 }
                                               }
                             })
