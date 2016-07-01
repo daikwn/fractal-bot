@@ -1,5 +1,7 @@
 class MessengerBotController < ActionController::Base
 require 'yahoo_parse_api'
+require 'searchbing'
+BingAPIKEY = 'lYikK+t6tN1ecVMq/Td1G5KSN0NxEY7yDISQvfyOT7w'
 @@key = 0
 
   
@@ -34,6 +36,9 @@ def message(event, sender)
     sender.reply({text: "【起動】で起動します。"})
     
   elsif text != "起動" && @@key == 1
+  
+    
+    BingSearch.account_key = BingAPIKEY
     YahooParseApi::Config.app_id = 'dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-'
     parse_api = YahooParseApi::Parse.new
     result = parse_api.parse(text, {
@@ -85,8 +90,17 @@ def message(event, sender)
     sender.reply({ text: "副詞の数: #{rep_hk}" })
     sender.reply({ text: "形容詞の数: #{rep_ky}" })
     
+    bing_image = BingSearch.image(score.ceil, limit: 10).shuffle[0]
+    
     if 0 < score
       sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点: #{score.ceil}" })
+      sender.reply({ "attachment": {
+                     "type": "image",
+                     "payload": {
+                     "url": bing_image.media_url
+                          }
+                                              }
+                            })
     else
       sender.reply({ text: "0点です。"})
     end
