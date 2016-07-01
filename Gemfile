@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', group: :development
+gem "bing-search"
 # 本番ではpostgressを使用する
 gem 'pg', group: :production
 # Use SCSS for stylesheets

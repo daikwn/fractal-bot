@@ -39,6 +39,7 @@ GEM
     arel (6.0.3)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bing-search (2.0.0)
     builder (3.2.2)
     byebug (9.0.5)
     cairo (1.15.2)
@@ -167,6 +168,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bing-search
   byebug
   cairo (~> 1.15, >= 1.15.2)
   coffee-rails (~> 4.1.0)
