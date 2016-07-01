@@ -79,7 +79,8 @@ def message(event, sender)
     userslTO = userSL_m + userSL_d + userSL_j + userSL_jd + userSL_hk + userSL_ky
     
     score = 100*(1-userslTO.to_f)
-    @score = score.ceil
+    scoreSE = score.ceil
+    scoreSER = scoreSE.to_s
     
     sender.reply({ text: "名詞の数: #{rep_m}" })
     sender.reply({ text: "動詞の数: #{rep_d}" })
@@ -91,7 +92,7 @@ def message(event, sender)
     if 0 < score
       sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点: #{score.ceil}" })
       BingSearch.account_key = BingAPIKEY
-      bing_image = BingSearch.image(@score, limit: 30).shuffle[0]
+      bing_image = BingSearch.image(scoreSER, limit: 30).shuffle[0]
       if bing_image.nil?
           sender.reply({ text: "画像が見つかりませんでした" })
       else
