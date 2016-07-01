@@ -120,7 +120,7 @@ def message(event, sender)
       sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点" })
       sender.reply({"attachment":{
                     "type": "image",
-                    "payload":{"url": "./app/assets/images/score.png"}
+                    "payload":{"url": "https://www.dac.co.jp/site_logo.png"}
                     }
                   })
     else
