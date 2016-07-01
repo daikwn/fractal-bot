@@ -128,6 +128,8 @@ def message(event, sender)
     end
     
     @@key = 0
+    filename = './app/assets/images/score.png'
+    File.unlink filename
     
     if 0 < score && score <= 20
       sender.reply({ text: "★やる気あんのか"})
