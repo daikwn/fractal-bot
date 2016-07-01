@@ -118,11 +118,13 @@ def message(event, sender)
     
     if 0 < score
       sender.reply({ text: "#{profile_last_name} #{profile_first_name}さんの得点" })
-      sender.reply({"attachment":{
-                    "type": "image",
-                    "payload":{"url": "https://www.dac.co.jp/site_logo.png"}
-                    }
-                  })
+      sender.reply({ "attachment": {
+                     "type": "image",
+                     "payload": {
+                     "url": "https://www.dac.co.jp/site_logo.png"
+                                }
+                                              }
+                            })
     else
       sender.reply({ text: "0点です。"})
     end
