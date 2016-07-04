@@ -35,6 +35,7 @@ def message(event, sender)
     sender.reply({text: "【起動】で起動します。"})
     
   elsif text != "起動" && @@key == 1
+    @@key = 0
     BingSearch.account_key = BingAPIKEY
     YahooParseApi::Config.app_id = 'dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-'
     parse_api = YahooParseApi::Parse.new
@@ -105,8 +106,6 @@ def message(event, sender)
     else
       sender.reply({ text: "0点です。"})
     end
-    
-    @@key = 0
 
     if 0 < score && score <= 20
       sender.reply({ text: "★やる気あんのか"})
