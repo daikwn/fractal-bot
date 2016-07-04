@@ -126,7 +126,6 @@ end
   
   def delivery(event, sender)
   end
-  
   def postback(event, sender)
     payload = event["postback"]["payload"]
     case payload
