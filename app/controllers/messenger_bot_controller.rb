@@ -113,7 +113,9 @@ def message(event, sender)
       sender.reply({ text: "★少し文章が短すぎるかもしれませんね。もう一文増やしてみればよいのでは？"})
     elsif 40 < score && score <= 60
       sender.reply({ text: "★うーん…表現に工夫を加えてみましょう。比喩表現を入れてみるとか？"})
-    elsif 60 < score && score <= 80
+    elsif 60 < score && score <= 70
+      sender.reply({ text: "★いい感じですね。なかなかの美しさです。"})
+    elsif 70 < score && score <= 80
       sender.reply({ text: "★なかなかハイスコアです。ちなみに川端康成の文章を判定すると平均85点くらいです。"})
     elsif 80 < score && score <= 100
       sender.reply({ text: "★ﾋﾞｭｰﾃｨﾌｫｰ"})
