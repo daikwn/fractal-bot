@@ -1,7 +1,7 @@
 class MessengerBotController < ActionController::Base
 require 'yahoo_parse_api'
 require 'bing-search'
-BingAPIKEY = 'lYikK+t6tN1ecVMq/Td1G5KSN0NxEY7yDISQvfyOT7w'
+BingAPIKEY = ''
 
 @@key = 0
 
@@ -37,7 +37,7 @@ def message(event, sender)
   elsif text != "起動" && @@key == 1
     @@key = 0
     BingSearch.account_key = BingAPIKEY
-    YahooParseApi::Config.app_id = 'dj0zaiZpPXZhTWlrcHFVME9xOCZzPWNvbnN1bWVyc2VjcmV0Jng9Y2Y-'
+    YahooParseApi::Config.app_id = ''
     parse_api = YahooParseApi::Parse.new
     result = parse_api.parse(text, {
              results: 'ma,uniq',
